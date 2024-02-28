@@ -1,0 +1,227 @@
+:root {
+  --delete: #ff005d;
+  --delete-hover: #d91c61;
+}
+
+body {
+  grid-template-columns: 1fr;
+}
+body > header > :only-child {
+  margin-block-start: 0;
+}
+
+.wrapper {
+  grid-column: 1;
+  place-self: center;
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  max-width: 500px;
+}
+
+.no-display {
+  display: none;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+button {
+  padding: 15px 20px;
+  font-weight: 600;
+}
+
+button.small-btn {
+  font-size: 0.7rem;
+  padding: 0.2rem 1rem;
+}
+
+input {
+  display: block;
+}
+
+ul {
+  list-style: none;
+  padding-inline-start: 0.5rem;
+}
+
+/* HEADER */
+
+body > header {
+  display: grid;
+  height: 5rem;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 0;
+}
+
+.logoutWrapper {
+  justify-self: end;
+  margin-right: 0.64rem;
+}
+
+body > header h1 {
+  padding-left: 1rem;
+  margin: 0;
+  justify-self: start;
+  font-size: 2rem;
+  line-height: 3rem;
+}
+
+body > header h1 > a {
+  text-decoration: none;
+}
+
+#logoutForm button {
+  margin: 0;
+}
+
+/* LOGIN PAGE */
+
+.formWrapper:not(.no-display) {
+  display: grid;
+  grid-auto-flow: row;
+}
+
+#startSubmit {
+  min-width: 100px;
+  margin-left: 10px;
+}
+
+#loginForm {
+  display: grid;
+  gap: 5px;
+  place-items: center;
+}
+#registrationForm {
+  display: grid;
+  place-items: center center;
+}
+
+.or p {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.or p::before,
+.or p::after {
+  content: "";
+  display: table-cell;
+  width: 30%;
+  height: 0;
+  border: 1px solid var(--text);
+}
+
+/* QR CODE */
+
+.qrWrapper:not(.no-display) {
+  display: grid;
+  gap: 0.25rem;
+  grid-auto-flow: row;
+}
+
+.qrWrapper p:last-of-type {
+  padding: 0 0.5rem;
+  margin-top: 0;
+}
+
+.qrWrapper .or p {
+  margin: 0.7rem 0;
+}
+
+.canvasWrapper {
+  justify-self: center;
+  max-width: 200px;
+  padding: 1rem;
+  background-color: #dcdcdc;
+  border: 1px solid #111;
+  border-radius: var(--standard-border-radius);
+}
+
+#qr_code {
+  max-width: 100%;
+  display: block;
+}
+
+#regen {
+  max-width: fit-content;
+  justify-self: center;
+}
+
+code {
+  font-size: 1.5rem;
+}
+
+/* USER CODE */
+
+#codeForm {
+  justify-self: center;
+}
+
+/* PASSKEY LIST */
+
+th {
+  text-align: center;
+}
+
+td:first-child {
+  border-right: 0;
+}
+td:nth-child(2) {
+  border-left: 0;
+}
+.displayName {
+  font-weight: bold;
+}
+
+.tableWrapper button {
+  aspect-ratio: 1/1;
+  max-width: 57.7px;
+}
+.tableWrapper li:nth-child(2),
+.deviceId {
+  font-size: 0.7rem;
+  word-break: break-all;
+}
+
+.tableWrapper td:last-of-type {
+  min-width: 140.2px;
+}
+
+button.change {
+  margin-right: 0.5rem;
+}
+
+button.delete:not([disabled]) {
+  background-color: var(--delete);
+  border-color: var(--delete);
+  color: #ccc;
+}
+button.delete:hover:not([disabled]) {
+  background-color: var(--delete-hover);
+  border-color: var(--delete-hover);
+}
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 720px) {
+  body > header h1 {
+    font-size: 1.3rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  body > header h1 {
+    font-size: 1.1rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .wrapper {
+    margin: 0 0.3rem;
+  }
+}

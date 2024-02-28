@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="github.com/Montblanc0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+    <link rel="stylesheet" href="style/style.css" />
+    <title>FIDO2 Playground Post-Logout</title>
+  </head>
+
+  <body>
+    <header>
+      <h1><a href="/" title="Homepage">FIDO2 Playground</a></h1>
+    </header>
+    <div class="wrapper">
+      <h3 id="message">Logout in corso...</h3>
+    </div>
+    <script type="module">
+      import env from "/env.js";
+      import { deleteAllCookies } from "/js/lib/utils.js";
+      console.log("Deleting application cookies...");
+      deleteAllCookies();
+      document.location.href = env.origin_url;
+    </script>
+  </body>
+</html>

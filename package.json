@@ -1,0 +1,24 @@
+{
+  "name": "wso2is_fido2_playground",
+  "version": "1.0.0",
+  "description": "A Passkey Manager that takes full advantage of WSO2IS FIDO2 API",
+  "main": "server.js",
+  "scripts": {
+    "open-browser": "node -e \"require('dotenv').config(); require('child_process').exec('start ' + process.env.ORIGIN_URL + ':' + (process.env.PORT || 5500))\"",
+    "start": "npm-run-all -p server open-browser",
+    "server": "node ./server.js"
+  },
+  "author": "Montblanc0",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "npm-run-all": "^4.1.5",
+    "open": "^10.0.3"
+  }
+}

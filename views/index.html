@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="github.com/Montblanc0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+    <link
+      rel="stylesheet"
+      href="//use.fontawesome.com/releases/v5.15.4/css/all.css"
+    />
+    <link rel="stylesheet" href="style/style.css" />
+    <title>FIDO2 Playground Login</title>
+    <script src="js/lib/qrious.min.js"></script>
+    <script src="js/login.js" type="module" defer></script>
+    <script src="js/qrcode_login.js" type="module" defer></script>
+  </head>
+
+  <body>
+    <header>
+      <h1><a href="/" title="Homepage">FIDO2 Playground</a></h1>
+    </header>
+    <div class="wrapper">
+      <h3>Login Page</h3>
+      <div class="formWrapper">
+        <form id="loginForm">
+          <button id="loginSubmit">
+            <i class="fas fa-key"></i
+            >&nbsp;&nbsp;Accedi&nbsp;con&nbsp;OAuth&nbsp;2.0
+          </button>
+        </form>
+        <div class="or">
+          <p>OPPURE</p>
+        </div>
+        <form id="qrForm">
+          <button id="qrSubmit">
+            <i class="fas fa-qrcode"></i
+            >&nbsp;&nbsp;Accedi&nbsp;con&nbsp;QR&nbspcode
+          </button>
+        </form>
+      </div>
+      <div class="qrWrapper no-display">
+        <p>Scansiona il codice con il tuo smarthphone</p>
+        <div class="canvasWrapper">
+          <canvas id="qr_code"></canvas>
+        </div>
+        <p id="exp-text" class="no-display">Il codice è scaduto.</p>
+        <button id="regen" class="small-btn">Rigenera</button>
+        <div class="or">
+          <p>OPPURE</p>
+        </div>
+        <p>
+          Visita
+          <a
+            id="verification_link"
+            href="#"
+            target="_blank"
+            title="Device Login"
+          ></a>
+          e inserisci il codice in basso:
+        </p>
+        <code></code>
+      </div>
+    </div>
+  </body>
+</html>

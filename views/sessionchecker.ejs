@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <title>OIDC Session IFrame</title>
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
+    <script>
+      // SESSION LOGIC (session cookie + checksession endpoint)
+      var session_state = getCookie("session_state");
+      var access_token = getCookie("access_token");
+      var id_token = getCookie("id_token");
+
+      var stat = "unchanged";
+      var client_id = "<%= client_id %>";
+      var mes = client_id + " " + session_state;
+      var targetOrigin = "<%= base_url + '/oidc/checksession' %>";
+      var interval;
+
+      function check_session() {
+        var opIFrame = document.getElementById("opIFrame");
+        var win = opIFrame.contentWindow;
+        win.postMessage(mes, targetOrigin);
+      }
+
+      function setTimer() {
+        check_session();
+        interval = setInterval(check_session, 60 * 1000);
+      }
+
+      async function receiveMessage(e) {
+        if (targetOrigin.indexOf(e.origin) < 0) {
+          return;
+        }
+
+        if (e.data == "changed") {
+          console.log("[RP] SESSION STATE CAMBIATO.");
+          clearInterval(interval);
+          const isConfirmed = confirm(
+            "Lo stato della sessione è cambiato. Vuoi tornare alla pagina di login?"
+          );
+          if (isConfirmed) {
+            deleteAllCookies();
+            window.top.location = "<%= origin_url %>";
+          }
+        } else if (e.data == "unchanged") {
+          console.log("[RP] session state invariato. Ricontrollo tra 60 sec.");
+        } else {
+          console.error("[RP] error while checking session status");
+        }
+      }
+      function getCookie(name) {
+        var cookies = document.cookie.split(";");
+        for (var cookie of cookies) {
+          var [cookieName, cookieValue] = cookie.trim().split("=");
+          if (cookieName === name) {
+            return cookieValue;
+          }
+        }
+        return null;
+      }
+
+      function deleteAllCookies() {
+        var cookies = document.cookie.split(";");
+
+        for (var cookie of cookies) {
+          var [name] = cookie.split("=").map((c) => c.trim());
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+        }
+      }
+
+      function start() {
+        if (!(access_token && id_token)) {
+          console.log(
+            "Token cookie non presenti. Reindirizzamento a pagina di login."
+          );
+          deleteAllCookies();
+          window.top.location = "<%= origin_url %>";
+        } else if (session_state) {
+          window.addEventListener("message", receiveMessage, false);
+          setTimer();
+        } else {
+          // Non attivare in caso di device flow grant
+          console.log(
+            "session_state cookie assente. Probabile device flow grant (session managing currently unimplemented on device flow grant)"
+          );
+        }
+      }
+    </script>
+  </head>
+  <body onload="start()">
+    <iframe
+      id="opIFrame"
+      src="<%= encodeURI(base_url + '/oidc/checksession?client_id=' + client_id + '&redirect_uri=' + origin_url) %>"
+      frameborder="0"
+      width="0"
+      height="0"
+    ></iframe>
+  </body>
+</html>

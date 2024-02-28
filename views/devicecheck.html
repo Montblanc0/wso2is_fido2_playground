@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="github.com/Montblanc0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css" />
+    <link
+      rel="stylesheet"
+      href="//use.fontawesome.com/releases/v5.15.4/css/all.css"
+    />
+    <link rel="stylesheet" href="style/style.css" />
+    <title>FIDO2 Playground Login</title>
+    <script src="js/code_auth.js" type="module" defer></script>
+  </head>
+
+  <body>
+    <header>
+      <h1><a href="/" title="Homepage">FIDO2 Playground</a></h1>
+    </header>
+    <div class="wrapper">
+      <h3>Inserisci il codice</h3>
+      <div class="formWrapper">
+        <form action="" id="codeForm">
+          <input
+            type="text"
+            maxlength="6"
+            id="user_code"
+            name="user_code"
+            required
+            autofocus
+          />
+
+          <button id="codeSubmit" disabled>
+            <i class="fas fa-key"></i>&nbsp;&nbsp;Accedi
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
